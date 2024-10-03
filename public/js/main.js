@@ -100,7 +100,7 @@ document.getElementById('searchButton').addEventListener('click', async () => {
 window.onload = async () => {
     const response = await fetch("http://localhost:3000/api/checkSession");
     const result = await response.json();
-    console.log(result)
+    console.log("ログイン状態：" + result.loggedIn)
 
     if (result.loggedIn) {
         document.getElementById("loginStatus").innerText = `ログイン中: ${result.email}`;

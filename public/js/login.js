@@ -11,26 +11,26 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
   
     // axiosを使って、ログインAPIにPOSTリクエストを送信
     axios.post('http://localhost:3000/api/login', {
-        email: email,  // 入力されたメールアドレスを送信
-        password: password  // 入力されたパスワードを送信
-    })
+      email: email,  // 入力されたメールアドレスを送信
+      password: password  // 入力されたパスワードを送信
+    }, { withCredentials: true })  // クッキーを送信するためにwithCredentialsを設定
     .then(response => {
-        // ログイン成功時、サーバーからのメッセージをアラートで表示
-        alert(response.data.message);
-        // ログイン成功後、ホームページ（index.html）にリダイレクト
-        window.location.href = 'index.html';
+      // ログイン成功時、サーバーからのメッセージをアラートで表示
+      alert(response.data.message);
+      // ログイン成功後、ホームページ（index.html）にリダイレクト
+      window.location.href = 'index.html';
     })
     .catch(error => {
       // エラーが発生した場合、エラーメッセージをコンソールに出力
       console.error('Error:', error);
       if (error.response) {
-          // サーバーからのエラーレスポンスがある場合、その内容をコンソールにログ出力
-          console.log('Error response:', error.response);  // 追加のログ
-          // エラーメッセージを画面に表示
-          document.getElementById('errorMessage').textContent = error.response.data.error || 'An error occurred';
+        // サーバーからのエラーレスポンスがある場合、その内容をコンソールにログ出力
+        console.log('Error response:', error.response);  // 追加のログ
+        // エラーメッセージを画面に表示
+        document.getElementById('errorMessage').textContent = error.response.data.error || 'An error occurred';
       } else {
-          // サーバーからのエラーレスポンスがない場合の一般的なエラーメッセージを表示
-          document.getElementById('errorMessage').textContent = 'An error occurred';
+        // サーバーからのエラーレスポンスがない場合の一般的なエラーメッセージを表示
+        document.getElementById('errorMessage').textContent = 'An error occurred';
       }
     });
   });
