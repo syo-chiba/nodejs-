@@ -24,8 +24,6 @@ router.delete('/users/:id', userController.deleteUser);
 // ログイン機能のルートを設定する (POSTリクエスト)
 router.post('/login', userController.loginUser);
 
-router.get('/checkSession', userController.checkSession);
-
 // ユーザー検索エンドポイント
 router.get('/users/search', userController.userSearch);
 

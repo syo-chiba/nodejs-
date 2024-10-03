@@ -6,8 +6,6 @@ const bcrypt = require('bcrypt');
 // 'User' モデルをインポートして、データベース操作を行う
 const User = require('../models/userModel');
 
-const session = require('express-session');
-
 // 新しいユーザーを作成する関数をエクスポートする
 exports.createUser = (req, res) => {
     const { name, email, password } = req.body;
@@ -74,15 +72,6 @@ exports.loginUser = (req, res) => {
             res.status(200).json({ message: 'Login successful' });
         });
     });
-};
-
-// セッションの確認処理を行う関数
-exports.checkSession = (req, res) => {
-    if (req.session.userId) {
-        res.json({ loggedIn: true, userId: req.session.userId });
-    } else {
-        res.json({ loggedIn: false });
-    }
 };
 
 exports.userSearch = (req, res) => {

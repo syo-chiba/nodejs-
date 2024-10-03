@@ -2,7 +2,6 @@
 
 require('dotenv').config();
 const express = require('express');
-const session = require('express-session');  // セッション管理用ミドルウェア
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');  // ルートをインポート
 
@@ -16,18 +15,6 @@ app.use(cors({
 }));
 
 app.use(express.json());  // JSONのリクエストボディをパース
-
-// セッション設定
-app.use(session({
-  secret: "your_secret_key",  // セッションの秘密鍵
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: false,  // HTTPSの場合はtrueに設定
-    httpOnly: true,  // クライアント側からクッキーを操作できないようにする
-    sameSite: 'lax'  // クッキーの共有範囲を制限
-  }
-}));
 
 // ルートを/apiエンドポイントに設定
 app.use('/api', userRoutes);
